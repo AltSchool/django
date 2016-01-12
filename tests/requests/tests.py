@@ -564,15 +564,15 @@ class RequestsTests(SimpleTestCase):
         self.assertTrue('foo' in request.GET.keys())
         self.assertEqual(request.GET['foo'], 'bar')
 
-        request = factory.get(u'/?foo=☂')
+        request = factory.get(u'/?foo=%E2%98%82')
         self.assertTrue('foo' in request.GET.keys())
         self.assertEqual(request.GET['foo'], u'☂')
 
-        request = factory.get(u'/?foo[]=☂')
+        request = factory.get(u'/?foo[]=%E2%98%82')
         self.assertTrue('foo[]' in request.GET.keys())
         self.assertEqual(request.GET['foo[]'], u'☂')
 
-        request = factory.get(u'/?foo[]=☂&foo[]=bar')
+        request = factory.get(u'/?foo[]=%E2%98%82&foo[]=bar')
         self.assertTrue('foo[]' in request.GET.keys())
         self.assertEqual(request.GET.getlist('foo[]'), [u'☂', 'bar'])
 
